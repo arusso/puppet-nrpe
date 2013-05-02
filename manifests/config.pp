@@ -1,5 +1,5 @@
 class nrpe::config {
-  $xinetd_enable = $nrpe::xinetd_r ? {
+  $xinetd_disable = $nrpe::xinetd_r ? {
     true    => 'no',
     default => 'yes',
   }
@@ -17,7 +17,7 @@ class nrpe::config {
       'server'         => '/usr/sbin/nrpe',
       'server_args'    => '-c /etc/nagios/nrpe.cfg --inetd',
       'log_on_failure' => 'USERID',
-      'disable'        => 'no',
+      'disable'        => $xinetd_disable,
       'only_from'      => join($nrpe::allowed_hosts_r, ' '),
     }
   }
