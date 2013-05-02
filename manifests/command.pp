@@ -18,7 +18,7 @@ define nrpe::command (
     }
   }
 
-  file { "/etc/nrpe.d/${name_r}.cfg":
+  file { "${nrpe::nrpe_dot_d_dir}/${name_r}.cfg":
     ensure  => 'file',
     owner   => 'nrpe',
     group   => 'nrpe',
