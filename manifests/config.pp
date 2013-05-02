@@ -1,6 +1,6 @@
 class nrpe::config {
-  if $nrpe::use_xinetd {
-    xinetd::daemon { 'nrpe':
+  if $nrpe::xinetd_r {
+    xinetd::service_entry { 'nrpe':
       ensure             => 'present',
       options            => {
         'flags'          => 'REUSE',
@@ -8,13 +8,13 @@ class nrpe::config {
         'port'           => '5666',
         'socket_type'    => 'stream',
         'wait'           => 'no',
-        'user'           => 'nagios',
-        'group'          => 'nagios',
+        'user'           => 'nrpe',
+        'group'          => 'nrpe',
         'server'         => '/usr/sbin/nrpe',
         'server_args'    => '-c /etc/nagios/nrpe.cfg --inetd',
-        #'log_on_failure' => 'USERID',
+        'log_on_failure' => 'USERID',
         'disable'        => 'no',
-        'only_from'      => join($nrpe::nrpe_servers, ' '),
+        'only_from'      => join($nrpe::allowed_hosts_r, ' '),
       }
     }
   } else {
