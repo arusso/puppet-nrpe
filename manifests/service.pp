@@ -1,8 +1,18 @@
 class nrpe::service {
-  if ! $nrpe::xinetd_r {
-    service { 'nrped':
-      ensure => running,
-      enable => true,
+
+  case $nrpe::xinetd_r {
+    true: {
+      $ensure_r = 'stopped'
+      $enable_r = false
     }
+    default: {
+      $ensure_r = 'running'
+      $enable_r = true
+    }
+  }
+
+  service { 'nrped':
+    ensure => $ensure_r,
+    enable => $enable_r,
   }
 }
