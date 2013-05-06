@@ -23,6 +23,7 @@ define nrpe::command (
     owner   => 'nrpe',
     group   => 'nrpe',
     mode    => '0440',
-    content => "command[${name_r}]=${command_r}\n"
+    content => "command[${name_r}]=${command_r}\n",
+    require => Class['nrpe::package'],
   }
 }
