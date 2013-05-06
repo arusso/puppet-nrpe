@@ -1,3 +1,7 @@
+# == Class: nrpe::config
+#
+# Sets up our NRPE configuration
+#
 class nrpe::config {
   $xinetd_disable = $nrpe::xinetd_r ? {
     true    => 'no',

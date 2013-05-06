@@ -1,3 +1,17 @@
+# == Class: nrpe
+#
+#  NRPE class that sets up NRPE service and config on our system
+#
+# === Parameters:
+#
+# [*allowed_hosts*]
+#
+# Array of hosts to allow to connect to NRPE.  Default is [ '127.0.0.1' ]
+#
+# [*xinetd*]
+#
+# Should we use xinetd instead of running an NRPE daemon? Default is false.
+#
 class nrpe (
   $allowed_hosts = [ '127.0.0.1' ],
   $xinetd = false

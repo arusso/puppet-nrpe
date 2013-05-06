@@ -1,3 +1,7 @@
+# == Class: nrpe::service
+#
+# Manages the NRPE service.
+#
 class nrpe::service {
 
   case $nrpe::xinetd_r {

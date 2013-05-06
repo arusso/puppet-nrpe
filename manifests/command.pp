@@ -1,3 +1,13 @@
+# == Class: nrpe::command
+#
+# NRPE command item.  Resource name is the command name.
+#
+# === Parameters:
+#
+# [*command*]
+#
+# Command to execute for this check
+#
 define nrpe::command (
   $command = undef
 ) {
