@@ -1,6 +1,7 @@
 # nrpe Module #
 
-This module provides mechanisms to manage your NRPE rules
+This module provides mechanisms to manage your NRPE rules.  Currently only works
+when xinetd = true.  Non-xinetd support is coming soon.
 
 # Examples #
 
