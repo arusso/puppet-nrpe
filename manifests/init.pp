@@ -50,5 +50,17 @@ class nrpe (
     $allowed_hosts_r = split( join($allowed_hosts, ','), '[:,|;]')
   }
 
-  include nrpe::package, nrpe::service, nrpe::config
+  class { 'nrpe::package': xinetd => $xinetd_r }
+
+  class { 'nrpe::service': xinetd => $xinetd_r }
+
+  class { 'nrpe::config':
+    allowed_hosts => $allowed_hosts_r,
+    xinetd        => $xinetd_r,
+  }
+
+  # Define resource relationships
+  Class['nrpe::package'] ->
+    Class['nrpe::config'] ~>
+    Class['nrpe::service']
 }

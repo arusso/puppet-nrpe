@@ -1,9 +1,37 @@
 # == Class: nrpe::config
 #
-# Sets up our NRPE configuration
+# Sets up our NRPE configuration.
+
+# This class is called by the top-level nrpe class, and should not be called
+# directly.
 #
-class nrpe::config {
-  $xinetd_disable = $nrpe::xinetd_r ? {
+# === Parameters:
+#
+# [*allowed_hosts*]
+#
+# Hosts that are allowed to conenct to nrpe
+#
+# [*xinetd*]
+#
+# Whether or not to use nrpe behind xinetd
+#
+# === Notes:
+#
+# This class does not fully validate parameters.  It is expected that
+# comprehensive validation occurs at the top-level nrpe class, which users
+# should be using instead of this class directly.
+#
+class nrpe::config (
+  $xinetd = 'UNSET',
+  $allowed_hosts = 'UNSET'
+) {
+  if $xinetd == 'UNSET' { fail('xinetd parameter left unset!') }
+  if $allowed_hosts == 'UNSET' { fail('allowed_hosts parameter left unset!') }
+
+  validate_array( $allowed_hosts )
+  validate_bool( $xinetd )
+
+  $xinetd_disable = $xinetd ? {
     true    => 'no',
     default => 'yes',
   }
@@ -22,7 +50,7 @@ class nrpe::config {
       'server_args'    => '-c /etc/nagios/nrpe.cfg --inetd',
       'log_on_failure' => 'USERID',
       'disable'        => $xinetd_disable,
-      'only_from'      => join($nrpe::allowed_hosts_r, ' '),
+      'only_from'      => join($allowed_hosts, ' '),
     }
   }
 }

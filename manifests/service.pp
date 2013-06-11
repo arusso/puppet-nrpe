@@ -2,16 +2,25 @@
 #
 # Manages the NRPE service.
 #
-class nrpe::service {
-
-  case $nrpe::xinetd_r {
+class nrpe::service (
+  $xinetd = 'UNSET'
+) {
+  case $xinetd {
     true: {
       $ensure_r = stopped
       $enable_r = false
     }
-    default: {
+    false: {
       $ensure_r = running
       $enable_r = true
+    }
+
+    'UNSET': {
+      fail('xinetd parameter not set')
+    }
+
+    default: {
+      fail('invalid value for xinetd passed')
     }
   }
 

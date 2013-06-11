@@ -8,11 +8,16 @@
 # Class['xinetd::service'], ensuring the nrpe user will exist before xinetd is
 # reloaded
 #
-class nrpe::package {
+class nrpe::package (
+  $xinetd = 'UNSET'
+) {
   include nrpe
 
+  if $xinetd == 'UNSET' { fail('xinetd parameter left unset!') }
+  validate_bool( $xinetd )
+
   package { 'nrpe': ensure => installed }
-  if $nrpe::xinetd_r {
+  if $xinetd {
     include xinetd
     # ensure our nrpe user is setup first before we reload xinetd
     Package['nrpe'] ~> Class['xinetd::service']
