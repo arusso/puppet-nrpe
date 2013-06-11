@@ -36,21 +36,25 @@ class nrpe::config (
     default => 'yes',
   }
 
-  xinetd::service_entry { 'nrpe':
-    ensure             => 'present',
-    options            => {
-      'flags'          => 'REUSE',
-      'type'           => 'UNLISTED',
-      'port'           => '5666',
-      'socket_type'    => 'stream',
-      'wait'           => 'no',
-      'user'           => 'nrpe',
-      'group'          => 'nrpe',
-      'server'         => '/usr/sbin/nrpe',
-      'server_args'    => '-c /etc/nagios/nrpe.cfg --inetd',
-      'log_on_failure' => 'USERID',
-      'disable'        => $xinetd_disable,
-      'only_from'      => join($allowed_hosts, ' '),
+  # only worry about enabling the nrpe xinetd serivce here. if we want to
+  # disable it, we should use the nrpe::config::disable_xinetd class
+  if $xinetd {
+    xinetd::service_entry { 'nrpe':
+      ensure             => 'present',
+      options            => {
+        'flags'          => 'REUSE',
+        'type'           => 'UNLISTED',
+        'port'           => '5666',
+        'socket_type'    => 'stream',
+        'wait'           => 'no',
+        'user'           => 'nrpe',
+        'group'          => 'nrpe',
+        'server'         => '/usr/sbin/nrpe',
+        'server_args'    => '-c /etc/nagios/nrpe.cfg --inetd',
+        'log_on_failure' => 'USERID',
+        'disable'        => $xinetd_disable,
+        'only_from'      => join($allowed_hosts, ' '),
+      }
     }
   }
 }
