@@ -6,11 +6,11 @@ class nrpe::service {
 
   case $nrpe::xinetd_r {
     true: {
-      $ensure_r = 'stopped'
+      $ensure_r = stopped
       $enable_r = false
     }
     default: {
-      $ensure_r = 'running'
+      $ensure_r = running
       $enable_r = true
     }
   }

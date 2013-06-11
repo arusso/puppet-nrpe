@@ -9,26 +9,23 @@
 # Command to execute for this check
 #
 define nrpe::command (
-  $command = undef
+  $command = 'UNSET'
 ) {
   include nrpe
-  case $name {
-    /^[a-z][a-z0-9_]+$/: { $name_r = $name }
-    default: {
-      fail("Nrpe::Check_command[${name}] : Invalid command name")
-    }
+
+  if $name =~ /^[a-z][a-z0-9_]+$/ {
+    $name_r = $name
+  } else {
+    fail("Nrpe::Check_command[${name}] : Invalid command name")
   }
 
-  case $command {
-    undef,'': {
-      fail("Nrpe::Check_command[${name}] : Check command must be specified")
-    }
-    default: {
-      $command_r = $command
-    }
+  if $command == 'UNSET' or $command == '' {
+    fail("NRPE::Check_command[${name}] : check command must be specified")
+  } else {
+    $command_r = $command
   }
 
-  file { "${nrpe::nrpe_dot_d_dir}/${name_r}.cfg":
+  file { "${nrpe::conf_d_r}/${name_r}.cfg":
     ensure  => 'file',
     owner   => 'nrpe',
     group   => 'nrpe',
