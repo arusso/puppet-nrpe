@@ -16,7 +16,7 @@ class nrpe::service (
     }
 
     'UNSET': {
-      fail('xinetd parameter not set')
+      fail('xinetd parameter left unset')
     }
 
     default: {
