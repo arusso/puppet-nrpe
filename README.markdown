@@ -21,11 +21,6 @@ License
 
 None
 
-Change Log
-----------
-
-* 0.0.1 : Initial Release
-
 Contact
 -------
 
@@ -35,4 +30,4 @@ Support
 -------
 
 Please log tickets and issues at the
-[Projects site](https://github.com/arusso23/puppet-nrpe/issues/)
+[Projects site](https://github.com/arusso/puppet-nrpe/issues/)
