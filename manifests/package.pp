@@ -11,8 +11,6 @@
 class nrpe::package (
   $xinetd = 'UNSET'
 ) {
-  include nrpe
-
   if $xinetd == 'UNSET' { fail('xinetd parameter left unset!') }
   validate_bool( $xinetd )
 
