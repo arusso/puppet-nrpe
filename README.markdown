@@ -15,12 +15,16 @@ when xinetd = true.  Non-xinetd support is coming soon.
     command => '/usr/lib64/nagios/plugins/check_disk -w 10% -c 5% /',
   }
 </code></pre>
- 
 
 License
 -------
 
-None
+See LICENSE file
+
+Copyright
+---------
+
+Copyright &copy; 2013 The Regents of the University of California
 
 Contact
 -------
