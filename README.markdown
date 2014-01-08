@@ -3,6 +3,8 @@
 This module provides mechanisms to manage your NRPE rules.  Currently only works
 when xinetd = true.  Non-xinetd support is coming soon.
 
+master branch build status: [![Build Status](https://travis-ci.org/arusso/puppet-nrpe.png?branch=master)](https://travis-ci.org/arusso/puppet-nrpe)
+
 # Examples #
 
     class { 'nrpe':
