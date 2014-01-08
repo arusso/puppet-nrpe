@@ -5,22 +5,24 @@ when xinetd = true.  Non-xinetd support is coming soon.
 
 # Examples #
 
-<pre><code>
-  class { 'nrpe':
-    allowed_hosts => [ '10.0.0.10', '127.0.0.1' ],
-    xinetd        => true,
-  }
-
-  nrpe::command { 'check_root_disk':
-    command => '/usr/lib64/nagios/plugins/check_disk -w 10% -c 5% /',
-  }
-</code></pre>
- 
+    class { 'nrpe':
+      allowed_hosts => [ '10.0.0.10', '127.0.0.1' ],
+      xinetd        => true,
+    }
+    
+    nrpe::command { 'check_root_disk':
+      command => '/usr/lib64/nagios/plugins/check_disk -w 10% -c 5% /',
+    }
 
 License
 -------
 
-None
+See LICENSE file
+
+Copyright
+---------
+
+Copyright &copy; 2014 The Regents of the University of California
 
 Contact
 -------
