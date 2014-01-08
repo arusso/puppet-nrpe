@@ -24,7 +24,7 @@ See LICENSE file
 Copyright
 ---------
 
-Copyright &copy; 2013 The Regents of the University of California
+Copyright &copy; 2014 The Regents of the University of California
 
 Contact
 -------
