@@ -1,5 +1,5 @@
 name 'arusso-nrpe'
-version '0.0.1'
+version '0.0.2'
 summary "nrpe management"
 description "NRPE command management module"
 project_page "https://github.com/arusso/puppet-nrpe"
